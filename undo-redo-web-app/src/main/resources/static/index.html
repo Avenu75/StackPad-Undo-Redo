@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <title>StackPad — Undo & Redo Editor</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="StackPad home">
+        <span class="brand-mark">S</span>
+        <span>Stack<span class="brand-light">Pad</span></span>
+      </a>
+      <span class="status"><span class="status-dot"></span> Java stack-powered editor</span>
+    </header>
+
+    <section class="intro">
+      <p class="eyebrow">A SIMPLE SPACE TO THINK</p>
+      <h1>Write freely.<br><span>Undo confidently.</span></h1>
+      <p class="subtitle">A lightweight text editor demonstrating the power of stack data structures.</p>
+    </section>
+
+    <section class="editor-card" aria-label="Text editor">
+      <div class="toolbar">
+        <div class="document-label"><span class="doc-icon">▤</span><div><strong>Untitled note</strong><small id="save-status">Ready to write</small></div></div>
+        <div class="actions">
+          <button id="undo-btn" class="tool-btn" title="Undo (Ctrl/Cmd + Z)" disabled>↶ <span>Undo</span></button>
+          <button id="redo-btn" class="tool-btn" title="Redo (Ctrl/Cmd + Y)" disabled>↷ <span>Redo</span></button>
+          <span class="toolbar-divider"></span>
+          <button id="history-btn" class="tool-btn history-btn">☷ <span>History</span></button>
+          <button id="clear-btn" class="clear-btn">Clear</button>
+        </div>
+      </div>
+
+      <textarea id="editor" spellcheck="true" placeholder="Start typing your ideas here…
+
+Try writing a sentence, then use Undo to reverse your last change. Use Redo to bring it back."></textarea>
+
+      <div class="editor-footer">
+        <span id="word-count">0 words · 0 characters</span>
+        <span><span class="key">Ctrl</span> + <span class="key">Z</span> to undo</span>
+      </div>
+    </section>
+
+    <section class="learning-row">
+      <div class="learning-icon">↕</div>
+      <div><strong>What is happening behind the scenes?</strong><p>The Java backend keeps an <b>Undo Stack</b> and a <b>Redo Stack</b>. Each stack follows Last In, First Out (LIFO).</p></div>
+    </section>
+    <footer>Built with Java · Spring Boot · HTML · CSS · JavaScript</footer>
+  </main>
+
+  <div id="history-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="history-title">
+    <div class="modal">
+      <div class="modal-heading"><div><p class="eyebrow">YOUR EDITING JOURNEY</p><h2 id="history-title">Text history</h2></div><button id="close-history" class="close-btn" aria-label="Close history">×</button></div>
+      <div class="history-columns">
+        <section><h3>Undo stack <span id="undo-count">0</span></h3><ol id="undo-history" class="history-list"></ol></section>
+        <section><h3>Redo stack <span id="redo-count">0</span></h3><ol id="redo-history" class="history-list"></ol></section>
+      </div>
+      <p class="modal-note">The most recently saved state is at the top of each stack.</p>
+    </div>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
